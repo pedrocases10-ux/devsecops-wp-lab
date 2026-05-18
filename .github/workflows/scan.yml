@@ -28,16 +28,16 @@ jobs:
             -p 3306:3306 \
             mysql:5.7
 
-      - name: Start WordPress container (Vulnerable Version)
+      - name: Start WordPress container
         run: |
           docker run -d --name wp-site \
-            --link wp-db:mysql \
-            -e WORDPRESS_DB_HOST=wp-db:3306 \
-            -e WORDPRESS_DB_USER=wpuser \
-            -e WORDPRESS_DB_PASSWORD=wppass \
-            -e WORDPRESS_DB_NAME=wordpress \
-            -p 8080:80 \
-            wordpress:5.0
+          --link wp-db:mysql \
+          -e WORDPRESS_DB_HOST=host.docker.internal:3306 \
+          -e WORDPRESS_DB_USER=wpuser \
+          -e WORDPRESS_DB_PASSWORD=wppass \
+          -e WORDPRESS_DB_NAME=wordpress \
+          -p 8080:80 \
+          unizarlover/wordpress-hardened:latest
 
       - name: Wait for WordPress to be ready
         run: |
