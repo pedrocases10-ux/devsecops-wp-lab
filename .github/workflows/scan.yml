@@ -28,7 +28,16 @@ jobs:
             -p 3306:3306 \
             mysql:5.7
 
-      - name: Start WordPress container
+      - name: Wait for Database to be FULLY Ready
+        run: |
+          echo "Waiting for database to accept connections..."
+          until docker exec wp-db mysqladmin ping -h"localhost" -u"wpuser" -p"wppass" --silent; do
+            echo "Database is starting up..."
+            sleep 3
+          done
+          echo "Database is ready!"
+
+      - name: Start WordPress container with Plugin
         run: |
           docker run -d --name wp-site \
           --link wp-db:mysql \
@@ -36,23 +45,14 @@ jobs:
           -e WORDPRESS_DB_USER=wpuser \
           -e WORDPRESS_DB_PASSWORD=wppass \
           -e WORDPRESS_DB_NAME=wordpress \
+          -v ${{ github.workspace }}/docker/contact-form-7:/usr/src/wordpress/wp-content/plugins/contact-form-7 \
           -p 8080:80 \
           wordpress:5.0
 
-      - name: Wait for Environment and Inject Plugin
+      - name: Wait for WordPress Port to Open
         run: |
-          echo "Waiting for database to be ready..."
-          until docker exec wp-db mysqladmin ping -h"localhost" -u"wpuser" -p"wppass" --silent; do
-            echo "Waiting..."
-            sleep 2
-          done
-          
-          echo "Giving WordPress 10 seconds to initialize folders..."
-          sleep 10
-          
-          echo "Creating plugin folder and injecting vulnerable component..."
-          docker exec wp-site mkdir -p /var/www/html/wp-content/plugins/contact-form-7
-          docker cp ./docker/contact-form-7/. wp-site:/var/www/html/wp-content/plugins/contact-form-7/
+          echo "Giving WordPress 15 seconds to open port 8080..."
+          sleep 15
 
       - name: Install Ruby and WPScan
         run: |
