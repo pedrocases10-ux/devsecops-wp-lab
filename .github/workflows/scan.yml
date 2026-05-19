@@ -37,7 +37,7 @@ jobs:
           done
           echo "Database is ready!"
 
-      - name: Start WordPress container with Plugin
+      - name: Start WordPress container
         run: |
           docker run -d --name wp-site \
           --link wp-db:mysql \
@@ -45,7 +45,6 @@ jobs:
           -e WORDPRESS_DB_USER=wpuser \
           -e WORDPRESS_DB_PASSWORD=wppass \
           -e WORDPRESS_DB_NAME=wordpress \
-          -v ${{ github.workspace }}/docker/contact-form-7:/usr/src/wordpress/wp-content/plugins/contact-form-7 \
           -p 8080:80 \
           wordpress:5.0
 
@@ -69,6 +68,15 @@ jobs:
             --allow-root
           
           echo "WordPress is now fully configured and active!"
+
+      - name: Inject Vulnerable Plugin (Post-Install)
+        run: |
+          echo "Injecting vulnerable component into live instance..."
+          # Forzamos la creación de la carpeta final de plugins por si acaso
+          docker exec wp-site mkdir -p /var/www/html/wp-content/plugins/contact-form-7
+          # Copiamos directamente el plugin del repositorio dentro de la carpeta activa
+          docker cp ./docker/contact-form-7/. wp-site:/var/www/html/wp-content/plugins/contact-form-7/
+          echo "Plugin injected successfully!"
 
       - name: Install Ruby and WPScan
         run: |
