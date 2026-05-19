@@ -86,4 +86,4 @@ jobs:
 
       - name: Run WPScan
         run: |
-          wpscan --url http://localhost:8080 --enumerate u,vp,vt --force || true
+          wpscan --url http://localhost:8080 --enumerate u,vp,vt --force --api-token d8ZHbFb2ljNDDho1Qw8x2gB2GsbEkOc8Jk7OTeHPZhQ || true
