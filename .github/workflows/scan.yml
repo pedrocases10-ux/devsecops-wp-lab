@@ -42,16 +42,20 @@ jobs:
           
           
 
-      - name: Wait for WordPress to be ready
+      - name: Wait for Environment and Inject Plugin
         run: |
-          echo "Waiting for WordPress to start..."
-          for i in {1..30}; do
-            if curl -s http://localhost:8080/ | grep -q "WordPress"; then
-              echo "WordPress is ready!"
-              break
-            fi
-            sleep 5
+          echo "Waiting for database to be ready..."
+          until docker exec wp-db mysqladmin ping -h"localhost" -u"wpuser" -p"wppass" --silent; do
+            echo "Waiting..."
+            sleep 2
           done
+          
+          echo "Giving WordPress 10 seconds to initialize folders..."
+          sleep 10
+          
+          echo "Creating plugin folder and injecting vulnerable component..."
+          docker exec wp-site mkdir -p /var/www/html/wp-content/plugins/contact-form-7
+          docker cp ./docker/contact-form-7/. wp-site:/var/www/html/wp-content/plugins/contact-form-7
 
           docker cp ./docker/contact-form-7 wp-site:/var/www/html/wp-content/plugins/
 
