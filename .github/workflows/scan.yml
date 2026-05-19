@@ -37,8 +37,9 @@ jobs:
           done
           echo "Database is ready!"
 
-      - name: Start WordPress container
+      - name: Start CUSTOM WordPress container (From Docker Hub)
         run: |
+          # REPLANTEA ESTA LÍNEA: Cambia 'TU_USUARIO_DOCKER_HUB' y 'nombre-de-tu-imagen' por tus datos reales
           docker run -d --name wp-site \
           --link wp-db:mysql \
           -e WORDPRESS_DB_HOST=wp-db:3306 \
@@ -46,7 +47,7 @@ jobs:
           -e WORDPRESS_DB_PASSWORD=wppass \
           -e WORDPRESS_DB_NAME=wordpress \
           -p 8080:80 \
-          wordpress:5.0
+          unizarlover/wordpress-hardened
 
       - name: Wait for WordPress and AUTO-INSTALL
         run: |
@@ -61,22 +62,13 @@ jobs:
           echo "Executing auto-installation of WordPress via CLI..."
           docker exec wp-site php /var/www/html/wp-cli.phar core install \
             --url=http://localhost:8080 \
-            --title="DevSecOps Lab" \
+            --title="DevSecOps Lab Robust" \
             --admin_user=admin \
             --admin_password=password123 \
             --admin_email=admin@example.com \
             --allow-root
           
           echo "WordPress is now fully configured and active!"
-
-      - name: Inject Vulnerable Plugin (Post-Install)
-        run: |
-          echo "Injecting vulnerable component into live instance..."
-          # Forzamos la creación de la carpeta final de plugins por si acaso
-          docker exec wp-site mkdir -p /var/www/html/wp-content/plugins/contact-form-7
-          # Copiamos directamente el plugin del repositorio dentro de la carpeta activa
-          docker cp ./docker/contact-form-7/. wp-site:/var/www/html/wp-content/plugins/contact-form-7/
-          echo "Plugin injected successfully!"
 
       - name: Install Ruby and WPScan
         run: |
