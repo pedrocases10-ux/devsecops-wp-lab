@@ -54,13 +54,13 @@ jobs:
           echo "Giving WordPress 15 seconds to open port 8080..."
           sleep 15
           
-          echo "Downloading WP-CLI tool to automate installation..."
-          curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          echo "Downloading WP-CLI to automate installation..."
+          curl -sS https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o wp-cli.phar
           chmod +x wp-cli.phar
+          docker cp wp-cli.phar wp-site:/var/www/html/wp-cli.phar
           
           echo "Executing auto-installation of WordPress via CLI..."
-          docker exec wp-site php /var/www/html/wp-includes/../wp-cli.phar core install \
-            --path=/var/www/html \
+          docker exec wp-site php /var/www/html/wp-cli.phar core install \
             --url=http://localhost:8080 \
             --title="DevSecOps Lab" \
             --admin_user=admin \
