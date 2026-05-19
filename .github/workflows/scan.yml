@@ -37,7 +37,10 @@ jobs:
           -e WORDPRESS_DB_PASSWORD=wppass \
           -e WORDPRESS_DB_NAME=wordpress \
           -p 8080:80 \
-          unizarlover/wordpress-hardened:latest
+          wordpress:5.0
+          
+          
+          docker cp ./docker/contact-form-7 wp-site:/var/www/html/wp-content/plugins/
 
       - name: Wait for WordPress to be ready
         run: |
