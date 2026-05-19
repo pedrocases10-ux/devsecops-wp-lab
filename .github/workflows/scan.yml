@@ -32,15 +32,12 @@ jobs:
         run: |
           docker run -d --name wp-site \
           --link wp-db:mysql \
-          -e WORDPRESS_DB_HOST=host.docker.internal:3306 \
+          -e WORDPRESS_DB_HOST=wp-db:3306 \
           -e WORDPRESS_DB_USER=wpuser \
           -e WORDPRESS_DB_PASSWORD=wppass \
           -e WORDPRESS_DB_NAME=wordpress \
           -p 8080:80 \
           wordpress:5.0
-          
-          
-          
 
       - name: Wait for Environment and Inject Plugin
         run: |
@@ -55,9 +52,7 @@ jobs:
           
           echo "Creating plugin folder and injecting vulnerable component..."
           docker exec wp-site mkdir -p /var/www/html/wp-content/plugins/contact-form-7
-          docker cp ./docker/contact-form-7/. wp-site:/var/www/html/wp-content/plugins/contact-form-7
-
-          docker cp ./docker/contact-form-7 wp-site:/var/www/html/wp-content/plugins/
+          docker cp ./docker/contact-form-7/. wp-site:/var/www/html/wp-content/plugins/contact-form-7/
 
       - name: Install Ruby and WPScan
         run: |
