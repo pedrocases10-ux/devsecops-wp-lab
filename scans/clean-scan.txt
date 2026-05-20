@@ -1,0 +1,69 @@
+2026-05-19T17:55:38.2203997Z _______________________________________________________________
+2026-05-19T17:55:38.2204515Z          __          _______   _____
+2026-05-19T17:55:38.2204893Z          \ \        / /  __ \ / ____|
+2026-05-19T17:55:38.2205346Z           \ \  /\  / /| |__) | (___   ___  __ _ _ __ ®
+2026-05-19T17:55:38.2205626Z            \ \/  \/ / |  ___/ \___ \ / __|/ _` | '_ \
+2026-05-19T17:55:38.2205880Z             \  /\  /  | |     ____) | (__| (_| | | | |
+2026-05-19T17:55:38.2206133Z              \/  \/   |_|    |_____/ \___|\__,_|_| |_|
+2026-05-19T17:55:38.2206375Z 
+2026-05-19T17:55:38.2206496Z          WordPress Security Scanner by the WPScan Team
+2026-05-19T17:55:38.2206773Z                          Version 3.8.28
+2026-05-19T17:55:38.2206992Z                                
+2026-05-19T17:55:38.2207236Z        @_WPScan_, @ethicalhack3r, @erwan_lr, @firefart
+2026-05-19T17:55:38.2207527Z _______________________________________________________________
+2026-05-19T17:55:38.2207726Z 
+2026-05-19T17:55:38.2207875Z [34m[i][0m Updating the Database ...
+2026-05-19T17:55:38.2208148Z [34m[i][0m Update completed.
+2026-05-19T17:55:38.2208297Z 
+2026-05-19T17:55:38.2213757Z [32m[+][0m URL: http://localhost:8080/ [::1]
+2026-05-19T17:55:38.2214129Z [32m[+][0m Started: Tue May 19 17:55:35 2026
+2026-05-19T17:55:38.2214310Z 
+2026-05-19T17:55:38.2214395Z Interesting Finding(s):
+2026-05-19T17:55:38.2214527Z 
+2026-05-19T17:55:38.2214632Z [32m[+][0m Headers
+2026-05-19T17:55:38.2214821Z  | Interesting Entries:
+2026-05-19T17:55:38.2215035Z  |  - Server: Apache/2.4.67 (Debian)
+2026-05-19T17:55:38.2215302Z  |  - X-Powered-By: PHP/8.3.31
+2026-05-19T17:55:38.2215550Z  | Found By: Headers (Passive Detection)
+2026-05-19T17:55:38.2215784Z  | Confidence: 100%
+2026-05-19T17:55:38.2215902Z 
+2026-05-19T17:55:38.2216155Z [32m[+][0m WordPress version 6.9.4 identified (Latest, released on 2026-03-11).
+2026-05-19T17:55:38.2216531Z  | Found By: Rss Generator (Passive Detection)
+2026-05-19T17:55:38.2217027Z  |  - http://localhost:8080/var/www/html/?feed=rss2, <generator>https://wordpress.org/?v=6.9.4</generator>
+2026-05-19T17:55:38.2217984Z  |  - http://localhost:8080/var/www/html/?feed=comments-rss2, <generator>https://wordpress.org/?v=6.9.4</generator>
+2026-05-19T17:55:38.2218361Z 
+2026-05-19T17:55:38.2218517Z [34m[i][0m The main theme could not be detected.
+2026-05-19T17:55:38.2218712Z 
+2026-05-19T17:55:38.2218911Z [32m[+][0m Enumerating Vulnerable Plugins (via Passive Methods)
+2026-05-19T17:55:38.2219132Z 
+2026-05-19T17:55:38.2219257Z [34m[i][0m No plugins Found.
+2026-05-19T17:55:38.2219397Z 
+2026-05-19T17:55:38.2219635Z [32m[+][0m Enumerating Vulnerable Themes (via Passive and Aggressive Methods)
+2026-05-19T17:55:38.2243859Z 
+2026-05-19T17:56:06.9344488Z  Checking Known Locations -: |=================================================|
+2026-05-19T17:56:07.1999036Z 
+2026-05-19T17:56:07.1999827Z [34m[i][0m No themes Found.
+2026-05-19T17:56:07.2000134Z 
+2026-05-19T17:56:07.2000635Z [32m[+][0m Enumerating Users (via Passive and Aggressive Methods)
+2026-05-19T17:56:07.2027452Z 
+2026-05-19T17:56:07.2957460Z  Brute Forcing Author IDs -: |=================================================|
+2026-05-19T17:56:07.6469054Z 
+2026-05-19T17:56:07.6469801Z [34m[i][0m User(s) Identified:
+2026-05-19T17:56:07.6470127Z 
+2026-05-19T17:56:07.6470302Z [32m[+][0m admin
+2026-05-19T17:56:07.6470650Z  | Found By: Rss Generator (Passive Detection)
+2026-05-19T17:56:07.6471098Z  | Confirmed By: Author Id Brute Forcing - Author Pattern (Aggressive Detection)
+2026-05-19T17:56:07.6471458Z 
+2026-05-19T17:56:07.6472130Z [32m[+][0m WPScan DB API OK
+2026-05-19T17:56:07.6472761Z  | Plan: free
+2026-05-19T17:56:07.6473094Z  | Requests Done (during the scan): 1
+2026-05-19T17:56:07.6473527Z  | Requests Remaining: 22
+2026-05-19T17:56:07.6473759Z 
+2026-05-19T17:56:07.6474027Z [32m[+][0m Finished: Tue May 19 17:56:07 2026
+2026-05-19T17:56:07.6474539Z [32m[+][0m Requests Done: 1374
+2026-05-19T17:56:07.6475003Z [32m[+][0m Cached Requests: 5
+2026-05-19T17:56:07.6475269Z [32m[+][0m Data Sent: 297.559 KB
+2026-05-19T17:56:07.6475545Z [32m[+][0m Data Received: 65.663 MB
+2026-05-19T17:56:07.6475808Z [32m[+][0m Memory used: 380.465 MB
+2026-05-19T17:56:07.6476081Z [32m[+][0m Elapsed time: 00:00:32
+2026-05-19T17:56:07.7146121Z Post job cleanup.
