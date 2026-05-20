@@ -38,8 +38,7 @@ jobs:
           echo "Database is ready!"
 
       - name: Start CUSTOM WordPress container (From Docker Hub)
-        run: |
-          # REPLANTEA ESTA LÍNEA: Cambia 'TU_USUARIO_DOCKER_HUB' y 'nombre-de-tu-imagen' por tus datos reales
+        run:
           docker run -d --name wp-site \
           --link wp-db:mysql \
           -e WORDPRESS_DB_HOST=wp-db:3306 \
